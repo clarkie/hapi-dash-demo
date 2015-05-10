@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/clarkie/hapi-dash-demo/issues"
   },
-  "homepage": "https://github.com/clarkie/hapi-dash-demo"
+  "homepage": "https://github.com/clarkie/hapi-dash-demo",
+  "dependencies": {
+    "hapi": "^8.4.0",
+    "hapi-dash": "0.0.4"
+  }
 }
