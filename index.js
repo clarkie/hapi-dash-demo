@@ -1,6 +1,7 @@
-var Hapi = require('hapi');
+var hapi = require('hapi');
+var randomWords = require('random-words');
 
-var server = new Hapi.Server();
+var server = new hapi.Server();
 server.connection({ port: 3334 });
 
 var methods = ['get', 'post', 'delete', 'put'];
@@ -27,12 +28,12 @@ server.start(function () {
 // send some dummy data to the server.
 var sendRequest = function () {
 	var method = methods[Math.floor(Math.random() * methods.length)];
-	server.inject({ method: method, url: '/'}, function (res) {
+	server.inject({ method: method, url: '/' + randomWords() }, function (res) {
 	});
 };
 
 (function loop() {
-	var rand = Math.round(Math.random() * (2000 - 100)) + 100;
+	var rand = Math.round(Math.random() * (500 - 10)) + 10;
 	setTimeout(function() {
 			sendRequest();
 			loop();
