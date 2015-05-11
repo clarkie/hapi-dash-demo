@@ -3,11 +3,14 @@ var Hapi = require('hapi');
 var server = new Hapi.Server();
 server.connection({ port: 3334 });
 
+var methods = ['get', 'post', 'delete', 'put'];
+
 server.route({
-	method: 'get',
-	path: '/test',
+	method: methods,
+	path: '/{params*}',
 	handler: function (request, reply) {
-		return reply().code(400);
+		var statusCodes = [200,201, 204, 400, 401, 404, 500];
+		return reply().code(statusCodes[Math.floor(Math.random() * statusCodes.length)]);
 	}
 });
 
@@ -23,7 +26,8 @@ server.start(function () {
 
 // send some dummy data to the server.
 var sendRequest = function () {
-	server.inject('/', function (res) {
+	var method = methods[Math.floor(Math.random() * methods.length)];
+	server.inject({ method: method, url: '/'}, function (res) {
 	});
 };
 
